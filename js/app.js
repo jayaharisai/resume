@@ -75,6 +75,20 @@ const resumeData = {
   "declaration": "I hereby declare that the information provided above is true and accurate to the best of my knowledge and belief."
 };
 
+/* ───────── Download PDF ───────── */
+
+(function () {
+  const btn = document.createElement("button");
+  btn.id = "download-pdf";
+  btn.className = "download-pdf";
+  btn.innerHTML = '<i class="fas fa-download"></i> Download PDF';
+  document.body.appendChild(btn);
+
+  btn.addEventListener("click", function () {
+    window.print();
+  });
+})();
+
 /* ───────── Theme Toggle ───────── */
 
 (function () {

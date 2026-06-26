@@ -2,9 +2,19 @@
    RESUME — Clean White Theme
    ============================================ */
 
-/* --- Theme Toggle Button --- */
-.theme-toggle {
+/* --- Top Bar Buttons --- */
+.theme-toggle,
+.download-pdf {
   position: fixed;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.theme-toggle {
   top: 1.25rem;
   right: 1.25rem;
   width: 2.5rem;
@@ -13,12 +23,6 @@
   border-radius: 50%;
   background: #ffffff;
   font-size: 1.2rem;
-  cursor: pointer;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s, border-color 0.2s, transform 0.2s;
   box-shadow: 0 1px 3px rgba(0,0,0,0.06);
 }
 
@@ -28,6 +32,36 @@
 
 .theme-toggle:active {
   transform: scale(0.95);
+}
+
+.download-pdf {
+  top: 1.25rem;
+  right: 4.25rem;
+  height: 2.5rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background: #ffffff;
+  font-size: 0.82rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  color: #333;
+  padding: 0 1rem;
+  gap: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+.download-pdf i {
+  font-size: 0.9rem;
+  color: #2563eb;
+}
+
+.download-pdf:hover {
+  background: #f8f8f8;
+  border-color: #ccc;
+}
+
+.download-pdf:active {
+  transform: scale(0.97);
 }
 
 /* --- Reset & Base --- */
@@ -69,6 +103,22 @@ body {
   }
   .resume {
     padding: 1.5rem 1.25rem;
+  }
+
+  .download-pdf {
+    top: 0.75rem;
+    right: 4rem;
+    height: 2.2rem;
+    font-size: 0.75rem;
+    padding: 0 0.7rem;
+  }
+
+  .theme-toggle {
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 2.2rem;
+    height: 2.2rem;
+    font-size: 1rem;
   }
 }
 
@@ -278,7 +328,7 @@ body {
 }
 
 .exp-highlights li::before {
-  content: "•";
+  content: "\2022";
   position: absolute;
   left: 0;
   color: #111;
@@ -332,7 +382,7 @@ body {
 }
 
 .others-list li::before {
-  content: "•";
+  content: "\2022";
   position: absolute;
   left: 0;
   color: #111;
@@ -461,15 +511,228 @@ body.dark .theme-toggle {
   box-shadow: 0 1px 3px rgba(0,0,0,0.3);
 }
 
-/* --- Print --- */
+body.dark .download-pdf {
+  background: #2a2a2a;
+  border-color: #444;
+  color: #ccc;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+body.dark .download-pdf i {
+  color: #6b9fff;
+}
+
+body.dark .download-pdf:hover {
+  background: #333;
+}
+
+/* --- Print / PDF --- */
 @media print {
+  @page {
+    size: A4;
+    margin: 1.2cm 1.5cm;
+  }
+
   body {
     background: #fff;
     padding: 0;
+    color: #000;
+    font-size: 11px;
+    line-height: 1.45;
   }
+
+  .theme-toggle,
+  .download-pdf {
+    display: none !important;
+  }
+
   .resume {
+    max-width: none;
+    padding: 0;
+    margin: 0;
     box-shadow: none;
     border-radius: 0;
-    padding: 1.5rem 2rem;
+    background: #fff;
+  }
+
+  .resume-header {
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.8rem;
+  }
+
+  .resume-header h1 {
+    font-size: 1.6rem;
+    color: #000;
+    margin-bottom: 0.2rem;
+  }
+
+  .resume-header .subhead {
+    font-size: 0.78rem;
+    color: #444;
+    margin-bottom: 0.4rem;
+  }
+
+  .resume-header .contact-row {
+    font-size: 0.75rem;
+    color: #333;
+    gap: 0.3rem 0.8rem;
+  }
+
+  .resume-header .contact-row a {
+    color: #000;
+    text-decoration: underline;
+  }
+
+  .resume-summary {
+    font-size: 0.78rem;
+    color: #222;
+    margin-bottom: 1.2rem;
+    text-align: justify;
+    line-height: 1.5;
+  }
+
+  .section {
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.2rem;
+    border-bottom-width: 1.5px;
+    color: #000;
+    border-bottom-color: #000;
+  }
+
+  .skills-table {
+    font-size: 0.75rem;
+  }
+
+  .skills-table td {
+    padding: 0.2rem 0.4rem;
+  }
+
+  .skills-table tr {
+    border-bottom: 1px solid #ddd;
+  }
+
+  .skill-category {
+    color: #000;
+  }
+
+  .skill-items {
+    color: #333;
+  }
+
+  .experience-item {
+    margin-bottom: 0.8rem;
+  }
+
+  .exp-company {
+    font-size: 0.82rem;
+    color: #000;
+  }
+
+  .exp-current-badge {
+    font-size: 0.58rem;
+    padding: 0.08rem 0.4rem;
+    color: #fff;
+    background: #000;
+  }
+
+  .exp-role {
+    font-size: 0.75rem;
+    color: #333;
+  }
+
+  .exp-period {
+    font-size: 0.7rem;
+    color: #555;
+  }
+
+  .exp-location {
+    font-size: 0.7rem;
+    color: #555;
+  }
+
+  .exp-highlights li {
+    font-size: 0.75rem;
+    color: #222;
+    margin-bottom: 0.2rem;
+    padding-left: 0.9rem;
+  }
+
+  .exp-highlights li::before {
+    color: #000;
+  }
+
+  .edu-degree {
+    font-size: 0.78rem;
+    color: #000;
+  }
+
+  .edu-institution {
+    font-size: 0.75rem;
+    color: #333;
+  }
+
+  .edu-status {
+    font-size: 0.72rem;
+    color: #555;
+  }
+
+  .others-list li {
+    font-size: 0.75rem;
+    color: #222;
+    margin-bottom: 0.2rem;
+  }
+
+  .declaration {
+    font-size: 0.72rem;
+    color: #555;
+    margin-top: 1rem;
+    padding-top: 0.6rem;
+    border-top-color: #ccc;
+  }
+
+  /* Dark mode overrides for print (always light) */
+  body.dark,
+  body.dark .resume {
+    background: #fff;
+    color: #000;
+  }
+
+  body.dark .resume-header h1,
+  body.dark .section-title,
+  body.dark .exp-company,
+  body.dark .edu-degree {
+    color: #000;
+  }
+
+  body.dark .resume-summary,
+  body.dark .exp-highlights li,
+  body.dark .others-list li {
+    color: #222;
+  }
+
+  body.dark .resume-header .contact-row a {
+    color: #000;
+  }
+
+  body.dark .exp-current-badge {
+    color: #fff;
+    background: #000;
+  }
+
+  body.dark .section-title {
+    border-bottom-color: #000;
+  }
+
+  body.dark .skills-table tr {
+    border-bottom-color: #ddd;
+  }
+
+  body.dark .declaration {
+    border-top-color: #ccc;
   }
 }
